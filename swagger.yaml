@@ -533,6 +533,33 @@ paths:
                 type: array
                 items:
                   $ref: '#/definitions/IncidentUpdateResponse'
+    post:
+      operationId: createIncidentUpdate
+      summary: Create an Incident Update
+      parameters:
+        - name: incident
+          in: path
+          required: true
+          description: Unique incident id
+          type: number
+          format: int32
+        - name: body
+          in: body
+          description: Incident update to create
+          required: true
+          schema:
+            $ref: '#/definitions/IncidentUpdate'
+      tags:
+        - Incidents
+      responses:
+        200:
+          description: Incident update response
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: '#/definitions/IncidentUpdateResponse' 
+        
   /incidents/{incident}/updates/{update}:
     get:
       operationId: getIncidentUpdateById
@@ -558,6 +585,60 @@ paths:
             properties:
               data:
                 $ref: '#/definitions/IncidentUpdateResponse'
+    put:
+      operationId: putIncidentUpdateById
+      summary: Update an incident update
+      parameters:
+        - name: incident
+          in: path
+          required: true
+          description: Unique incident id
+          type: number
+          format: int32
+        - name: update
+          in: path
+          required: true
+          description: Unique incident update id
+          type: number
+          format: int32
+        - name: status
+          in: query
+          required: false
+          description: The incident status flag
+          type: number
+          format: int32
+        - name: message
+          in: query
+          required: false
+          description: The update message
+          type: string
+      responses:
+        200:
+          description: Update incident update response
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: '#/definitions/IncidentUpdateResponse'
+    delete:
+      operationId: deleteIncidentUpdateById
+      summary: Delete an incident update
+      parameters:
+        - name: incident
+          in: path
+          required: true
+          description: Unique incident id
+          type: number
+          format: int32
+        - name: update
+          in: path
+          required: true
+          description: Unique incident update id
+          type: number
+          format: int32
+      response:
+        204:
+          description: The incident update was deleted successfully.
   /metrics:
     get:
       operationId: getMetrics
@@ -936,6 +1017,14 @@ definitions:
         type: string
         format: date-time
       human_status:
+        type: string
+  IncidentUpdate:
+    type: object
+    properties:
+      status:
+        type: number
+        format: int32
+      message:
         type: string
   Metric:
     type: object
