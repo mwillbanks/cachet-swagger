@@ -520,7 +520,7 @@ paths:
           type: number
           format: int32
       tags:
-        - Incidents
+        - Incident updates
       responses:
         200:
           description: Get incident updates response
@@ -550,7 +550,7 @@ paths:
           schema:
             $ref: '#/definitions/IncidentUpdate'
       tags:
-        - Incidents
+        - Incident updates
       responses:
         200:
           description: Incident update response
@@ -585,6 +585,8 @@ paths:
             properties:
               data:
                 $ref: '#/definitions/IncidentUpdateResponse'
+      tags:
+        - Incident updates
     put:
       operationId: putIncidentUpdateById
       summary: Update an incident update
@@ -612,6 +614,8 @@ paths:
           required: false
           description: The update message
           type: string
+      tags:
+        - Incident updates
       responses:
         200:
           description: Update incident update response
@@ -636,6 +640,8 @@ paths:
           description: Unique incident update id
           type: number
           format: int32
+      tags:
+        - Incident updates
       response:
         204:
           description: The incident update was deleted successfully.
